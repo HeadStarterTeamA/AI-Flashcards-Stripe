@@ -6,6 +6,9 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+
+// Evelise's firebase config
 // const firebaseConfig = {
 //   apiKey: "AIzaSyCYHSSOXXb_Nr0hUcr-pi0TnfU6kumLOxg",
 //   authDomain: "flashcard-b7725.firebaseapp.com",
