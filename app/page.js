@@ -72,7 +72,9 @@ export default function Home() {
         </Grid> 
       </Box>
       <Box sx = {{my: 6, textAlign: 'center'}}>
-      <Typography variant = "h4" gutterBottom>Pricing</Typography>
+      <Typography variant = "h4" gutterBottom>
+        Pricing
+      </Typography>
       <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <Box sx={{
@@ -80,21 +82,21 @@ export default function Home() {
               border: '1px solid',
               borderColor: 'grey.300',
               borderRadius: 2, 
-            }}>
-          <Typography variant = "h5" gutterBottom>Basic</Typography>
-          <Typography variant = "h6" gutterBottom>$5 / month</Typography>
-          <Typography>
-            {' '}
-           Access to basic flashcard features and limited storage
-          </Typography>
-          <Button variant = "contained" color = "primary" sx={{mt:2}}>
-            Choose basic
-          </Button>
-          </Box>
+              }}>
+              <Typography variant = "h5" gutterBottom>Basic</Typography>
+              <Typography variant = "h6" gutterBottom>$5 / month</Typography>
+              <Typography>
+                {' '}
+                Access to basic flashcard features and limited storage
+              </Typography>
+              <Button variant = "contained" color = "primary" sx={{mt:2}}>
+                Choose basic
+              </Button>
+            </Box>
           </Grid>
 
-          <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
+          {/* <Grid container spacing={4}> */}
+          <Grid item xs={12} md={6}>
             <Box sx={{
               p: 3,
               border: '1px solid',
@@ -112,7 +114,7 @@ export default function Home() {
           </Button>
           </Box>
           </Grid>
-          </Grid>
+          {/* </Grid> */}
 
           <Grid item xs={12} md={4}>
           <Typography variant = "h6">Smart Flashcards</Typography>
