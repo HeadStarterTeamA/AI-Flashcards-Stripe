@@ -1,6 +1,7 @@
 'use client'
 
 import {useUser} from '@clerk/nextjs'
+import {db} from '@/firebase'
 import {
     Container, 
     Box, 
@@ -17,9 +18,9 @@ import {
     DialogTitle, 
     DialogContent, 
     DialogContentText} from '@mui/material'
-import {writeBatch} from 'firebase/firestore'
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
+import {doc, collection, setDoc, getDoc, writeBatch } from 'firebase/firestore'
 
 export default function Generate(){
     const {isLoaded, isSignedIn, user} = useUser()
