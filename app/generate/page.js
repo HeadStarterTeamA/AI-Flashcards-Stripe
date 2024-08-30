@@ -1,7 +1,22 @@
 'use client'
 
 import {useUser} from '@clerk/nextjs'
-import {Container, Box, Button, Typography, Paper, TextField, Grid} from '@mui/material'
+import {
+    Container, 
+    Box, 
+    Button, 
+    Card,
+    CardActionArea,
+    CardContent,
+    Typography, 
+    Paper, 
+    TextField, 
+    Grid, 
+    Dialog,
+    DialogActions,
+    DialogTitle, 
+    DialogContent, 
+    DialogContentText} from '@mui/material'
 import {writeBatch} from 'firebase/firestore'
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
@@ -21,7 +36,7 @@ export default function Generate(){
             body: text,
         })
         .then((res) => res.json())
-        .then(data > setFlashcards(data))
+        .then((data) => setFlashcards(data))
     }
 
     const handleCardClick = (id) => {
@@ -166,7 +181,37 @@ export default function Generate(){
                         </Grid>
                     ))}
                 </Grid>
+                <Box sx={{mt: 4, display: 'flex', justifyContent:'center'}}>
+                    <Button variant='contained' color='secondary' onClick={handleOpen}>
+                        Save
+                    </Button>
+                </Box>
             </Box>
         )}
+
+        <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Save Flashcards</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    Please enter a name for your flashcard collection
+                </DialogContentText>
+                <TextField
+                    autoFocus 
+                    margin="dense" 
+                    label="Collection Name" 
+                    type="text" 
+                    fullWidth
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    variant="outlined"
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={saveFlashcards}>
+                    Save
+                </Button>
+            </DialogActions>
+        </Dialog>
     </Container>)
 }
