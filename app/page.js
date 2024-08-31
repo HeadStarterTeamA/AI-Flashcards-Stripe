@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import getStripe from '@/utils/get-stripe'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
@@ -5,6 +6,39 @@ import { Container, Box, Typography, AppBar, Toolbar, Button, Grid } from '@mui/
 import Head from 'next/head'
 
 export default function Home() {
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('/api/checkout_session', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          origin: 'http://localhost:3000',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to create checkout session');
+      }
+  
+      const checkoutSession = await checkoutSession.json();
+
+      if (checkoutSession.statusCode ==- 500){
+        console.error(checkoutSession.message)
+        return
+      }
+      // Handle the response, e.g., redirect or update the state
+      const stripe = await getStripe()
+      const {error} = await stripe.redirectToChekckout({
+        sessionId: checkoutSessionJson.id,
+      })
+
+      if(error){
+        console.warn(error.message)
+      }
+  }
+}
+
   return (
     <Container maxWidth="100vw">
       <Head>
@@ -114,7 +148,7 @@ export default function Home() {
             {' '}
            Unlimited flashcards and storage, with priority support.
           </Typography>
-          <Button variant = "contained" color = "primary" sx={{mt:2}}>
+          <Button variant = "contained" color = "primary" sx={{mt:2}} onClick={handleSubmit}>
             Choose pro
           </Button>
           </Box>
