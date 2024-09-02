@@ -36,7 +36,10 @@ export default function Home() {
       if(error){
         console.warn(error.message)
       }
+  }catch (error) {
+    console.error('Error during checkout:', error.message);
   }
+
 }
 
   return (
