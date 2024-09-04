@@ -6,7 +6,7 @@ import { Container, Box, Typography, AppBar, Toolbar, Button, Grid } from '@mui/
 import Head from 'next/head'
 
 export default function Home(){
-const handleSubmit = async () => {
+const handleSubmit = async (planType) => { //Added here
   try {
     const response = await fetch('/api/checkout_session', {
       method: 'POST',
@@ -14,6 +14,7 @@ const handleSubmit = async () => {
         'Content-Type': 'application/json',
         origin: 'http://localhost:3000',
       },
+      body: JSON.stringify({ plan: planType }), //Added this
     });
 
     if (!response.ok) {
@@ -130,7 +131,7 @@ const handleSubmit = async () => {
                 {' '}
                 Access to basic flashcard features and limited storage
               </Typography>
-              <Button variant = "contained" color = "primary" sx={{mt:2}}>
+              <Button variant = "contained" color = "primary" sx={{mt:2}} onClick={() => handleSubmit('basic')}>
                 Choose basic
               </Button>
             </Box>
@@ -150,7 +151,7 @@ const handleSubmit = async () => {
             {' '}
            Unlimited flashcards and storage, with priority support.
           </Typography>
-          <Button variant = "contained" color = "primary" sx={{mt:2}} onClick={handleSubmit}>
+          <Button variant = "contained" color = "primary" sx={{mt:2}} onClick={() => handleSubmit('pro')}>
             Choose pro
           </Button>
           </Box>
