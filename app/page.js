@@ -5,42 +5,41 @@ import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Container, Box, Typography, AppBar, Toolbar, Button, Grid } from '@mui/material'
 import Head from 'next/head'
 
-export default function Home() {
+export default function Home(){
+const handleSubmit = async () => {
+  try {
+    const response = await fetch('/api/checkout_session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        origin: 'http://localhost:3000',
+      },
+    });
 
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch('/api/checkout_session', {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          origin: 'http://localhost:3000',
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to create checkout session');
-      }
-  
-      const checkoutSession = await checkoutSession.json();
+    if (!response.ok) {
+      throw new Error('Failed to create checkout session');
+    }
 
-      if (checkoutSession.statusCode ==- 500){
-        console.error(checkoutSession.message)
-        return
-      }
-      // Handle the response, e.g., redirect or update the state
-      const stripe = await getStripe()
-      const {error} = await stripe.redirectToChekckout({
-        sessionId: checkoutSessionJson.id,
-      })
+    const checkoutSession = await response.json();
 
-      if(error){
-        console.warn(error.message)
-      }
-  }catch (error) {
+    if (checkoutSession.statusCode === 500) {
+      console.error(checkoutSession.message);
+      return;
+    }
+
+    // Handle the response, e.g., redirect or update the state
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.id,
+    });
+
+    if (error) {
+      console.warn(error.message);
+    }
+  } catch (error) {
     console.error('Error during checkout:', error.message);
   }
-
-}
+};
 
   return (
     <Container maxWidth="100vw">
