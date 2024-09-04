@@ -14,7 +14,7 @@ const handleSubmit = async (planType) => { //Added here
         'Content-Type': 'application/json',
         origin: 'http://localhost:3000',
       },
-      body: JSON.stringify({ plan: planType }), //Added this
+      body: JSON.stringify({ subscriptionType: planType }), //Added this
     });
 
     if (!response.ok) {
